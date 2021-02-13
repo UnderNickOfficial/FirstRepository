@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace WinFormsForRepository
 {
@@ -20,6 +21,26 @@ namespace WinFormsForRepository
         private void button1_Click(object sender, EventArgs e)
         {
             BackColor = Color.Orange;
+        }
+
+        private void load_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Text files|*.txt|All files|*.*";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = File.ReadAllText(dlg.FileName);
+            }
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "Text files|*.txt|All files|*.*";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(dlg.FileName, textBox1.Text);
+            }
         }
     }
 }
